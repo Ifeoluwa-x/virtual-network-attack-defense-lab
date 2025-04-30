@@ -320,6 +320,3 @@ I tested the firewall again by sending flood mode packets:
 ## 8. Conclusion
 
 I successfully set up a virtual lab, simulated ARP spoofing and ping flood attacks, detected the spoofing using arpwatch, captured and analyzed the attacks with Wireshark, and defended against them by manually setting static ARP entries and adding iptables rules. This project gave me valuable hands-on experience with both offensive and defensive network security skills at the packet level.
-
-
-📌 *Insert Screenshot: Final Wireshark capture showing filtered/fair traffic*
