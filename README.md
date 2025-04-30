@@ -48,11 +48,11 @@ to verify the gateway IP address.
 
 
 For Kali (Attacker):  
-![Kali gateway](images/fig2.3.1)
+![Kali gateway](images/fig2.3.1.png)
 
 
 For Ubuntu (Victim/Defender):  
-![Ubuntu gateway](images/fig2.3.2)
+![Ubuntu gateway](images/fig2.3.2.png)
 
 ### 2.4 Traffic Simulation and Detection
 
@@ -65,23 +65,23 @@ from kali to to ubuntu:
 ping -c 4 10.0.2.4
 ```
 
-![Kali test ping](images/fig2.4.1.1)
+![Kali test ping](images/fig2.4.1.1.png)
 
 from the Ubuntu Linux machine to the Kali machine, and:
 
 ```bash
 ping -c 4 10.0.2.15
 ``` 
-![Ubuntu test ping](images/fig2.4.1.2)
+![Ubuntu test ping](images/fig2.4.1.2.png)
 
 Both tests were successful, confirming that the VMs could reach each other over the network and were ready for attack simulation.
 
 
 #### 2.4.1.1 Snort Live Capture  
-![Snort test capture](images/fig2.4.1.1.1)
-![Snort test capture](images/fig2.4.1.1.2)
+![Snort test capture](images/fig2.4.1.1.1.png)
+![Snort test capture](images/fig2.4.1.1.2.png)
 #### 2.4.1.2 Wireshark Capture  
-![Wireshark test capture](images/fig2.4.1.2.1)
+![Wireshark test capture](images/fig2.4.1.2.1.png)
 
 ---
 
@@ -106,7 +106,7 @@ sudo arp-scan –interface eth0 --localnet
 
 to identify my network interface (eth0) and my victim’s IP address.
 
-![Scan Victim's Ip and gateway](images/fig3.1.1.1)
+![Scan Victim's Ip and gateway](images/fig3.1.1.1.png)
 
 Then I launched the ARP spoofing attack by running:
 
@@ -115,7 +115,7 @@ sudo arpspoof -i eth0 -t 10.0.2.4 10.0.2.1
 sudo arpspoof -i eth0 -t 10.0.2.1 10.0.2.4
 ```
 
-![ARP spoofing attack](images/fig3.1.1.2)
+![ARP spoofing attack](images/fig3.1.1.2.png)
 
 #### 3.1.2 Checking the Victim's ARP Table
 
@@ -126,14 +126,14 @@ arp -n
 ```
 
 **Before the attack**, the ARP table showed:
-![Arp table before attack](images/fig3.1.2.1)
+![Arp table before attack](images/fig3.1.2.1.png)
 
 ```
 10.0.2.1 -> 52:54:00:12:35:00
 ```
 
 **After launching the spoofing attack**, the ARP table changed to:
-![Arp table after attack](images/fig3.1.2.2)
+![Arp table after attack](images/fig3.1.2.2.png)
 
 ```
 10.0.2.1 -> 08:00:27:59:e2:dc
@@ -145,7 +145,7 @@ This showed that the spoofing attack was successful because both IPs now pointed
 I could also capture the attack on Wireshark.
 
 
-![wireshark capture of arp spoofing attack](images/fig3.1.2.3)
+![wireshark capture of arp spoofing attack](images/fig3.1.2.3.png)
 
 ---
 
@@ -163,7 +163,7 @@ Then, I installed and used `hping3` for a more aggressive flood:
 sudo apt install hping3
 sudo hping3 -1 --flood -p 80 10.0.2.4
 ```
-![Kali ping flood attack](images/fig3.2.1)
+![Kali ping flood attack](images/fig3.2.1.png)
 
 This caused the victim machine to experience high CPU usage and network slowdowns.
 
@@ -180,7 +180,7 @@ In Wireshark, I could see:
 
 This confirmed that the network attacks were successfully occurring at the packet level.
 
-![[wireshark capture of ping flood attack](images/fig3.3.1)
+![[wireshark capture of ping flood attack](images/fig3.3.1.png)
 
 ---
 
@@ -217,7 +217,7 @@ I detected that arpwatch logged a message showing that the MAC address for 10.0.
 arpwatch: changed ethernet address 10.0.2.1 08:00:27:59:e2:dc (52:54:00:12:35:00)
 ```
 
-![[Arp detetection of arp spoofing attack](images/fig4.1.1)
+![[Arp detetection of arp spoofing attack](images/fig4.1.1.png)
 
 ---
 
@@ -243,7 +243,7 @@ arp -n
 ```
 
 and confirmed that the ARP table now had a permanent entry (PERM), preventing any further spoofing.
-![[Manually setting arp table](images/fig4.2.1)
+![[Manually setting arp table](images/fig4.2.1.png)
 
 ---
 
@@ -257,11 +257,11 @@ sudo iptables -A INPUT -p icmp --icmp-type echo-request -j DROP
 ```
 
 This limited incoming pings to 1 per second and dropped any extra flood packets.
-![[ip tables](images/fig4.3.1)
+![[ip tables](images/fig4.3.1.png)
 This proves defense against icmp flood is properly implemented as only 1 packet per second is allowed and over 22,000 of them failed.
 
 I tested the firewall again by sending flood mode packets:
-![[Testing the firewall afterwards](images/fig4.3.2)
+![[Testing the firewall afterwards](images/fig4.3.2.png)
 
 - **Duration**: ~17.3 seconds  
 - **Packets Sent**: 1021  
