@@ -180,7 +180,7 @@ In Wireshark, I could see:
 
 This confirmed that the network attacks were successfully occurring at the packet level.
 
-![[wireshark capture of ping flood attack](images/fig3.3.1.png)
+![wireshark capture of ping flood attack](images/fig3.3.1.png)
 
 ---
 
@@ -217,7 +217,7 @@ I detected that arpwatch logged a message showing that the MAC address for 10.0.
 arpwatch: changed ethernet address 10.0.2.1 08:00:27:59:e2:dc (52:54:00:12:35:00)
 ```
 
-![[Arp detetection of arp spoofing attack](images/fig4.1.1.png)
+![Arp detetection of arp spoofing attack](images/fig4.1.1.png)
 
 ---
 
@@ -243,7 +243,7 @@ arp -n
 ```
 
 and confirmed that the ARP table now had a permanent entry (PERM), preventing any further spoofing.
-![[Manually setting arp table](images/fig4.2.1.png)
+![Manually setting arp table](images/fig4.2.1.png)
 
 ---
 
@@ -257,11 +257,11 @@ sudo iptables -A INPUT -p icmp --icmp-type echo-request -j DROP
 ```
 
 This limited incoming pings to 1 per second and dropped any extra flood packets.
-![[ip tables](images/fig4.3.1.png)
+![ip tables](images/fig4.3.1.png)
 This proves defense against icmp flood is properly implemented as only 1 packet per second is allowed and over 22,000 of them failed.
 
 I tested the firewall again by sending flood mode packets:
-![[Testing the firewall afterwards](images/fig4.3.2.png)
+![Testing the firewall afterwards](images/fig4.3.2.png)
 
 - **Duration**: ~17.3 seconds  
 - **Packets Sent**: 1021  
